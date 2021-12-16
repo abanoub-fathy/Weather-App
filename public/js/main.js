@@ -59,7 +59,7 @@ $form.addEventListener("submit", async (e) => {
     return alert(data.error);
   }
 
-  // call display the forecast function
+  // call display the forecast function to display the result
   displayForecast(data);
 });
 
