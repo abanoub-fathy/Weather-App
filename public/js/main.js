@@ -21,20 +21,25 @@ $closeBtn.addEventListener("click", () => {
 let coords = { longitude: "", latitude: "" };
 $locationBtn.addEventListener("click", () => {
   if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(async (pos) => {
-      coords.latitude = pos.coords.latitude;
-      coords.longitude = pos.coords.longitude;
+    navigator.geolocation.getCurrentPosition(
+      async (pos) => {
+        coords.latitude = pos.coords.latitude;
+        coords.longitude = pos.coords.longitude;
 
-      // making request to the server to get the forecast and the map to display on the screen
-      const data = await (
-        await fetch(
-          `/weather?longitude=${coords.longitude}&latitude=${coords.latitude}`
-        )
-      ).json();
+        // making request to the server to get the forecast and the map to display on the screen
+        const data = await (
+          await fetch(
+            `/weather?longitude=${coords.longitude}&latitude=${coords.latitude}`
+          )
+        ).json();
 
-      // call display the forecast function
-      displayForecast(data);
-    });
+        // call display the forecast function
+        displayForecast(data);
+      },
+      (error) => {
+        alert("Make Sure To open the GPS in your Device!");
+      }
+    );
   } else {
     alert("GeoLocation service not working!");
   }
